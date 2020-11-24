@@ -1,0 +1,21 @@
+.comment-container{
+    padding: 10px;
+    background-color: #FAFAFA;
+    margin: 10px 0;
+}
+
+.comment-user-info{
+    margin:0;
+}
+
+.comment-body{
+    margin:10px 0 0 0;
+}
+
+.comment-user-info {
+    color: #9E9E9E;
+}
+
+.comment-user-info strong{
+    color: #000;
+}

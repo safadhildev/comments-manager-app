@@ -1,0 +1,32 @@
+.details-container {
+    padding: 0 20px 50px 20px;
+}
+
+.details-card{
+    padding: 30px;
+    background-color: #424242;
+    color: #fff;
+    margin: 40px 0 0 0;
+}
+
+.details-title{
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 50px;
+    margin:0;
+}
+
+.details-body{
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    line-height: 30px;
+    margin: 10px 0 0 0;
+}
+
+.search-header{
+    margin: 20px 0; 
+}
+
+.search-title{
+font-family: 'Roboto Condensed',sans-serif;
+    margin:30px 0 10px 0;
+}
