@@ -12,6 +12,7 @@ const Details = ({ match }) => {
   const [searchValue, setSearchValue] = useState("");
   const [filterComments, setFilterComments] = useState([]);
   const [isLiveSearch, setIsLiveSearch] = useState(false);
+  const [searching, setSearching] = useState(false);
 
   const getData = async () => {
     try {
@@ -42,6 +43,7 @@ const Details = ({ match }) => {
   };
 
   const onSearchComments = () => {
+    setSearching(true);
     if (searchValue && filterComments !== "") {
       const filter = comments.filter(
         (comment) =>
@@ -77,12 +79,31 @@ const Details = ({ match }) => {
     setIsLiveSearch(!isLiveSearch);
   };
 
+  const renderComment = (item, index) => {
+    const { email, name, body } = item;
+    return (
+      <Comment
+        email={email}
+        name={name}
+        body={body}
+        searchValue={searchValue}
+      />
+    );
+  };
+
   const renderComments = () => {
     const arr = filterComments?.length > 0 ? filterComments : comments;
 
     return arr.map((item, index) => {
       const { email, name, body } = item;
-      return <Comment email={email} name={name} body={body} />;
+      return (
+        <Comment
+          email={email}
+          name={name}
+          body={body}
+          searchValue={searchValue}
+        />
+      );
     });
   };
 
@@ -111,7 +132,17 @@ const Details = ({ match }) => {
           Enable live search
         </label>
       </div>
-      {(comments?.length > 0 || filterComments?.length > 0) && renderComments()}
+      {searching ? (
+        filterComments?.length > 0 ? (
+          filterComments.map(renderComment)
+        ) : (
+          <h3>No comments found</h3>
+        )
+      ) : comments?.length > 0 ? (
+        comments.map(renderComment)
+      ) : (
+        <h3>No comments found</h3>
+      )}
     </div>
   );
 };

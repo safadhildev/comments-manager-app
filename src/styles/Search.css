@@ -20,6 +20,8 @@
 }
 
 .search-button{
+    background: none;
+    border: none;
     display: flex;
     flex-direction: column;
     background-color: #00796B;
@@ -30,12 +32,18 @@
     cursor: pointer;
 }
 
+
 .search-button:hover{
     background-color: #004D40;
 }
 
+.search-button:focus {
+   outline: none;
+}
+
 .search-button:active{
     opacity: 0.5;
+    border:none;
 }
 
 

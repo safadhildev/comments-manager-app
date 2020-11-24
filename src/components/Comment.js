@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/Comment.css";
 
-const Comment = ({ email, name, body }) => {
+const Comment = ({ email, name, body, searchValue }) => {
   return (
     <div className="comment-container">
       <p className="comment-user-info">

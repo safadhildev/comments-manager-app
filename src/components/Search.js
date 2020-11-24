@@ -15,9 +15,9 @@ const Search = ({ value, onChange, search, onPressSearch }) => {
         />
       </div>
       {search && (
-        <div className="search-button" onClick={onPressSearch}>
-          <p>Search</p>
-        </div>
+        <button className="search-button" onClick={onPressSearch}>
+          Search
+        </button>
       )}
     </div>
   );
