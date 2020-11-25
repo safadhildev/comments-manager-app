@@ -13,6 +13,7 @@ const Details = ({ match }) => {
   const [filterComments, setFilterComments] = useState([]);
   const [isLiveSearch, setIsLiveSearch] = useState(false);
   const [searching, setSearching] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [selectedOption, setSelectedOption] = useState("All");
 
   const getData = async () => {
@@ -23,8 +24,11 @@ const Details = ({ match }) => {
       if (promise?.status === 200) {
         const results = await promise.json();
         setData(results);
+        setLoading(false);
       }
     } catch (error) {
+      setLoading(false);
+      setIsError(true);
       console.log("Details - getData() - error => ", error);
     }
   };
@@ -114,6 +118,22 @@ const Details = ({ match }) => {
       />
     );
   };
+
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <h1>Getting data ... </h1>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="loading-container">
+        <h1>Error getting data {`:(`} </h1>
+      </div>
+    );
+  }
 
   return (
     <div className="details-container">
