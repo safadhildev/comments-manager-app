@@ -159,7 +159,7 @@ const Details = ({ match }) => {
             checked={isLiveSearch}
             onClick={() => onCheckLiveSearch()}
           />
-          Enable live search
+          Enable live filter
         </label>
       </div>
       {searching ? (
