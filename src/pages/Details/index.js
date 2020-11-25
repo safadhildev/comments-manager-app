@@ -13,6 +13,7 @@ const Details = ({ match }) => {
   const [filterComments, setFilterComments] = useState([]);
   const [isLiveSearch, setIsLiveSearch] = useState(false);
   const [searching, setSearching] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("All");
 
   const getData = async () => {
     try {
@@ -42,15 +43,36 @@ const Details = ({ match }) => {
     }
   };
 
-  const onSearchComments = () => {
+  const getFilter = () => {
+    switch (selectedOption.toUpperCase()) {
+      case "NAME": {
+        console.log("FILTERING BY NAME ...");
+        return comments.filter((comment) =>
+          comment.name.toUpperCase().includes(searchValue.toUpperCase())
+        );
+      }
+      case "EMAIL":
+        return comments.filter((comment) =>
+          comment.email.toUpperCase().includes(searchValue.toUpperCase())
+        );
+      case "COMMENTS":
+        return comments.filter((comment) =>
+          comment.body.toUpperCase().includes(searchValue.toUpperCase())
+        );
+      default:
+        return comments.filter(
+          (comment) =>
+            comment.name.toUpperCase().includes(searchValue.toUpperCase()) ||
+            comment.email.toUpperCase().includes(searchValue.toUpperCase()) ||
+            comment.body.toUpperCase().includes(searchValue.toUpperCase())
+        );
+    }
+  };
+
+  const onFilterComments = () => {
     setSearching(true);
     if (searchValue && filterComments !== "") {
-      const filter = comments.filter(
-        (comment) =>
-          comment.name.toUpperCase().includes(searchValue.toUpperCase()) ||
-          comment.email.toUpperCase().includes(searchValue.toUpperCase()) ||
-          comment.body.toUpperCase().includes(searchValue.toUpperCase())
-      );
+      const filter = getFilter();
       setFilterComments(filter);
     } else {
       setFilterComments(comments);
@@ -64,8 +86,9 @@ const Details = ({ match }) => {
   }, [id]);
 
   useEffect(() => {
+    setSearching(false);
     if (isLiveSearch) {
-      onSearchComments();
+      onFilterComments();
     }
   }, [searchValue]);
 
@@ -75,7 +98,6 @@ const Details = ({ match }) => {
   };
 
   const onCheckLiveSearch = () => {
-    console.log("current => ", isLiveSearch);
     setIsLiveSearch(!isLiveSearch);
   };
 
@@ -87,24 +109,10 @@ const Details = ({ match }) => {
         name={name}
         body={body}
         searchValue={searchValue}
+        searching={searching}
+        shouldHighlight={selectedOption}
       />
     );
-  };
-
-  const renderComments = () => {
-    const arr = filterComments?.length > 0 ? filterComments : comments;
-
-    return arr.map((item, index) => {
-      const { email, name, body } = item;
-      return (
-        <Comment
-          email={email}
-          name={name}
-          body={body}
-          searchValue={searchValue}
-        />
-      );
-    });
   };
 
   return (
@@ -119,7 +127,9 @@ const Details = ({ match }) => {
           onChange={onChange}
           value={searchValue}
           search={!isLiveSearch}
-          onPressSearch={() => onSearchComments()}
+          onPressSearch={() => onFilterComments()}
+          onChangeOption={(val) => setSelectedOption(val)}
+          selectedOption={selectedOption}
         />
         <label>
           <input
