@@ -4,7 +4,10 @@
 
 ## Run App
 
-`yarn start`
+Using Firebase Hosting [comments-manager-app.web.app](https://comments-manager-app.web.app/)
+#### or
+
+Locally:- `yarn start` in terminal
 to run the app in dev mode
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
