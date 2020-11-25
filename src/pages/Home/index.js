@@ -8,6 +8,8 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
+  console.log(process.env.REACT_APP_PROJECT_ID);
+
   const getData = async () => {
     try {
       const promise = await fetch(`https://jsonplaceholder.typicode.com/posts`);
